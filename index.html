@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Turn today's headlines into a sharp, shareable comic strip." />
+  <title>Headline Toons | News, but make it a comic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body data-api-endpoint="/api/cartoon">
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Headline Toons home">
+      <span class="brand-mark">HT</span>
+      <span>Headline <i>Toons</i></span>
+    </a>
+    <div class="topbar-meta"><span class="live-dot"></span> Studio mode <span class="divider"></span> 21 Aug 2026</div>
+  </header>
+
+  <main id="top">
+    <section class="intro section-wrap">
+      <div class="intro-copy">
+        <p class="eyebrow">THE DAILY DISPATCH, REIMAGINED</p>
+        <h1>News, but make it <span>a comic.</span></h1>
+        <p class="lede">Turn a headline into a three-panel visual story. Clear enough to understand. Fun enough to share.</p>
+      </div>
+      <div class="issue-stamp" aria-hidden="true"><span>ISSUE</span><strong>01</strong><small>THE<br />PLOT<br />THICKENS</small></div>
+    </section>
+
+    <section class="workspace section-wrap" aria-label="Cartoon generator">
+      <div class="input-column">
+        <div class="section-kicker"><span>01</span><h2>Bring the news</h2></div>
+        <form id="cartoon-form">
+          <label for="article-input">Paste an article, headline, or briefing</label>
+          <textarea id="article-input" placeholder="Paste the story here..." required></textarea>
+          <div class="input-footer"><span id="character-count">0 characters</span><button type="button" class="text-button" id="sample-button">Try a sample <span>↗</span></button></div>
+          <button class="primary-button" id="cartoon-button" type="submit"><span class="button-icon">✦</span><span id="button-label">Cartoonify this story</span><span class="button-arrow">→</span></button>
+        </form>
+        <p class="privacy-note"><span>▣</span> Your story stays in this browser unless you connect an AI endpoint.</p>
+      </div>
+      <div class="how-column">
+        <div class="section-kicker"><span>HOW IT WORKS</span></div>
+        <ol class="steps">
+          <li><b>01</b><span><strong>Drop in the story</strong><small>Paste text. No digging through links.</small></span></li>
+          <li><b>02</b><span><strong>We find the angle</strong><small>Key facts become punchy captions.</small></span></li>
+          <li><b>03</b><span><strong>Picture the punchline</strong><small>Each beat gets its own scene.</small></span></li>
+        </ol>
+        <div class="tip"><span class="tip-icon">!</span><p><strong>Best results</strong><br />Use at least a headline and two paragraphs. The more context, the sharper the strip.</p></div>
+      </div>
+    </section>
+
+    <section class="output section-wrap" id="output-section" aria-live="polite">
+      <div class="output-heading"><div class="section-kicker"><span>02</span><h2>Your front page</h2></div><div class="output-actions"><span id="story-status">Ready for a story</span><button class="icon-button" id="share-button" type="button" title="Copy a shareable summary" aria-label="Copy a shareable summary">⌯</button></div></div>
+      <div class="comic-strip" id="comic-strip">
+        <div class="empty-state"><span class="empty-burst">?</span><h3>The panels are waiting.</h3><p>Your next big story belongs here.</p></div>
+      </div>
+      <div class="strip-footer"><span>HEADLINE TOONS</span><span id="story-date">NO STORY YET</span><span>FACTS FIRST / FUN SECOND</span></div>
+    </section>
+  </main>
+  <footer class="footer section-wrap"><span>Made for curious people with five minutes.</span><span>Headline Toons / v1.0</span></footer>
+</body>
+</html>
