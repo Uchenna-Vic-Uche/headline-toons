@@ -1,0 +1,55 @@
+Core idea: A web app where people with zero animation experience can create playful, shareable animations — think "Canva meets Lottie" rather than a professional motion-design tool.
+
+Target user: Casual creators — people making GIFs/stickers for social media, greeting cards, presentation flourishes, simple explainer clips. Not professional animators.
+
+1. Core features (MVP)
+Template-first start: users pick from pre-built animation templates (bouncing text, particle bursts, character walk cycles, celebratory confetti, etc.) rather than a blank canvas
+Drag-and-drop timeline: simple keyframe editor — position, scale, rotation, opacity — with easing presets (bounce, elastic, ease-in-out) instead of raw curve editing
+Asset library: built-in shapes, emoji/sticker packs, simple character rigs, background patterns
+Live preview: instant playback as you edit
+Export: GIF, MP4, and Lottie/JSON (for embedding in apps/websites)
+2. Nice-to-have (v2)
+Text-to-animation ("type a phrase, get a title-card animation")
+Simple physics presets (gravity, bounce, spring)
+Collaborative/shareable projects with a public gallery
+Sound effects synced to keyframes
+3. Suggested tech stack (web-based, given you're a web dev)
+Frontend: React + Motion (formerly Framer Motion) for UI-driven animation, or GSAP for the timeline engine — GSAP is more powerful for building an actual editor
+Canvas rendering: Konva.js or PixiJS for the drawable/animatable canvas layer
+Timeline UI: build custom on top of a library like react-timeline-editor or roll your own with GSAP's timeline API
+Export: gif.js or ffmpeg.wasm for GIF/MP4 rendering in-browser; Lottie export via bodymovin-style JSON if you support vector animation
+Backend: lightweight (Node/Express or serverless) mainly for saving projects, assets, and rendering export jobs that are too heavy for the browser
+4. Build order
+Static canvas + object placement (no animation yet)
+Basic keyframe system (position/scale/opacity over time)
+Timeline UI + playback
+Easing presets + templates
+Export (GIF first — simplest), then MP4/Lottie
+Asset library and polish
+A prompt you can use to kick off the build
+I'm building a web app that lets casual, non-designer users create fun,
+short animations (GIFs, stickers, title cards) without needing animation
+skills. Think "Canva for simple animations."
+
+Tech stack: React, [GSAP or Motion — pick one], Konva.js for canvas
+rendering, gif.js for export.
+
+Please help me scaffold:
+1. A canvas component where users can add/select/move shapes, text, and
+   images
+2. A simple timeline data model: objects have keyframes for
+   position/scale/rotation/opacity at given times
+3. A timeline UI (horizontal scrubber + draggable keyframe markers)
+4. Playback controls that animate the canvas based on the timeline data
+5. A set of 5 starter templates (e.g. "bounce in," "confetti burst,"
+   "wobble text")
+
+Start with the data model and canvas rendering first, then build the
+timeline UI on top of it. Keep components modular so I can add GIF
+export later.
+
+ 
+
+
+
+

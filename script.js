@@ -1,84 +1,27 @@
-const sampleStory = `Scientists have switched on a new floating solar farm in the North Sea, covering an area the size of 18 football pitches. The project is expected to power around 3,000 homes while leaving coastal land available for farms and wildlife. Engineers say the platforms can move with the waves, but environmental groups are watching closely to see how marine life responds.`;
+const appMarkup = `
+  <div class="app-shell">
+    <aside class="sidebar"><div class="brand"><span class="brand-mark">◌</span><span>common <em>ground</em></span></div><div class="profile"><div class="avatar avatar-sun">AM</div><div><strong>Alex Morgan</strong><span>Personal space</span></div><button class="more-button">•••</button></div><nav><p class="nav-label">Your spaces</p><button class="room active" data-room="The kitchen table"><span class="room-icon coral">✦</span><span><strong>The kitchen table</strong><small>3 people · active now</small></span><b>2</b></button><button class="room" data-room="Project sunlight"><span class="room-icon yellow">◒</span><span><strong>Project sunlight</strong><small>5 people · 12 notes</small></span></button><button class="room" data-room="Weekend plans"><span class="room-icon blue">✳</span><span><strong>Weekend plans</strong><small>4 people · Saturday</small></span></button><button class="new-room"><span>＋</span> Start a new space</button></nav><div class="sidebar-bottom"><div class="tip-mark">✺</div><p><strong>A little room to think.</strong><br> No likes, no feeds, no pressure to perform.</p><button class="help-button">?</button></div></aside>
+    <main class="conversation"><header class="conversation-header"><div><div class="breadcrumb">SPACES <span>/</span> CONVERSATION</div><h1 id="room-title">The kitchen table</h1><p>Where we slow down enough to understand each other.</p></div><div class="header-actions"><button class="icon-button">⌕</button><button class="people-button"><span class="mini-avatars"><i>JS</i><i>NK</i><i>AM</i></span> 3 people <span>⌄</span></button></div></header><section class="conversation-body"><div class="day-divider"><span>THURSDAY, 21 AUGUST</span></div><div class="message-row"><div class="avatar avatar-jules">JS</div><article class="message"><div class="message-meta"><strong>Jules Santos</strong><time>09:41</time></div><p>I keep thinking about how we want to spend the last stretch of summer. A trip would be lovely, but I’m also craving a few slow days at home.</p><div class="message-reaction">♡ <span>2</span></div></article></div><div class="message-row"><div class="avatar avatar-nia">NK</div><article class="message"><div class="message-meta"><strong>Nia K.</strong><time>09:48</time></div><p>That makes sense. I’m leaning toward something that feels like a reset rather than another packed itinerary.</p><div class="message-note"><span>↗</span><span><b>What I’m hearing</b><br>You both want time that feels unhurried.</span></div><div class="message-reaction">♡ <span>1</span></div></article></div><div class="message-row own"><div class="avatar avatar-sun">AM</div><article class="message"><div class="message-meta"><strong>You</strong><time>10:02</time></div><p>Yes, exactly. What if we choose one place with good walks and leave the schedule mostly blank?</p><div class="message-reaction reacted">♥ <span>1</span></div></article></div><div class="typing"><span class="typing-dots"><i></i><i></i><i></i></span> Nia is thinking...</div><div class="composer-wrap"><div class="prompt-row"><span>Need a little help finding the words?</span><button class="prompt" data-prompt="I want to make sure everyone's needs are heard.">Make space for everyone ↗</button><button class="prompt" data-prompt="I see it a little differently, and I want to explain why.">Share a different view ↗</button></div><form class="composer" id="message-form"><textarea id="message-input" rows="2" placeholder="Add your voice to the table..."></textarea><div class="composer-tools"><div><button type="button" class="tool-button">＋</button><button type="button" class="tool-button">☺</button><span class="private-note">Private by default</span></div><button class="send-button">Send <span>↗</span></button></div></form></div></section></main>
+    <aside class="context-panel"><div class="context-head"><span>THE ROOM</span><button class="icon-button">×</button></div><div class="room-pulse"><div class="pulse-ring"><span>◌</span></div><h2>A place for<br><em>real</em> conversation.</h2><p>Say what you mean. Hear what they mean. Find the bit in between.</p></div><div class="context-section"><div class="context-title"><span>People here</span><button>＋</button></div><div class="person"><div class="avatar avatar-jules">JS</div><span><b>Jules Santos</b><small>Listening closely</small></span><i class="online"></i></div><div class="person"><div class="avatar avatar-nia">NK</div><span><b>Nia K.</b><small>Writing a reply...</small></span><i class="online"></i></div><div class="person"><div class="avatar avatar-sun">AM</div><span><b>Alex Morgan</b><small>You</small></span></div></div><div class="context-section reflection"><div class="context-title"><span>Conversation tone</span><span class="tone-label">OPEN</span></div><div class="tone-bar"><span></span><span></span><span></span><span></span><span></span></div><div class="tone-words"><span>Gentle</span><span>Curious</span><span>Honest</span></div></div><button class="room-settings">⚙ &nbsp; Space settings <span>→</span></button></aside>
+  </div>`;
 
-const form = document.querySelector('#cartoon-form');
-const input = document.querySelector('#article-input');
-const count = document.querySelector('#character-count');
-const sampleButton = document.querySelector('#sample-button');
-const strip = document.querySelector('#comic-strip');
-const status = document.querySelector('#story-status');
-const storyDate = document.querySelector('#story-date');
-const cartoonButton = document.querySelector('#cartoon-button');
-const buttonLabel = document.querySelector('#button-label');
-const shareButton = document.querySelector('#share-button');
+document.body.innerHTML = appMarkup;
 
-const demoPanels = [
-  { caption: 'Scientists put a solar farm out at sea. No land required. The ocean gets a new roommate.', icon: '☀️' },
-  { caption: 'The floating panels could power 3,000 homes. That is a lot of kettles, lamps, and late-night snacks.', icon: '🏠' },
-  { caption: 'The platforms ride the waves, while marine groups keep a close eye on the neighbors below.', icon: '🌊' }
-];
+const form = document.querySelector('#message-form');
+const input = document.querySelector('#message-input');
+const conversation = document.querySelector('.conversation-body');
+const roomTitle = document.querySelector('#room-title');
 
-function updateCount() {
-  const characters = input.value.length;
-  count.textContent = `${characters.toLocaleString()} character${characters === 1 ? '' : 's'}`;
+function escapeHtml(value) { return String(value).replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character])); }
+function addMessage(text) {
+  const row = document.createElement('div');
+  row.className = 'message-row own';
+  row.innerHTML = `<div class="avatar avatar-sun">AM</div><article class="message"><div class="message-meta"><strong>You</strong><time>now</time></div><p>${escapeHtml(text)}</p><div class="message-reaction reacted">♥ <span>1</span></div></article>`;
+  conversation.insertBefore(row, document.querySelector('.typing'));
+  conversation.scrollTop = conversation.scrollHeight;
 }
-
-function setLoading(loading) {
-  document.body.classList.toggle('is-loading', loading);
-  cartoonButton.disabled = loading;
-  buttonLabel.textContent = loading ? 'Finding the funny...' : 'Cartoonify this story';
-}
-
-function renderPanels(panels) {
-  strip.innerHTML = panels.map((panel, index) => `
-    <article class="comic-panel">
-      <div class="panel-art" style="background: ${['#8ec8dc', '#a9d9c7', '#f6c945'][index % 3]}">
-        <span class="panel-number">${String(index + 1).padStart(2, '0')}</span>
-        <span aria-hidden="true">${panel.icon || ['☀️', '🏠', '🌊'][index % 3]}</span>
-      </div>
-      <div class="panel-caption">${escapeHtml(panel.caption)}</div>
-    </article>
-  `).join('');
-  status.textContent = `${panels.length} panels, freshly inked`;
-  storyDate.textContent = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
-}
-
-function escapeHtml(value) {
-  return String(value).replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
-}
-
-async function requestCartoon(article) {
-  const endpoint = document.body.dataset.apiEndpoint;
-  if (!endpoint) return demoPanels;
-  const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ article }) });
-  if (!response.ok) throw new Error('The cartoon service is unavailable right now.');
-  const data = await response.json();
-  if (!Array.isArray(data.panels) || data.panels.length < 3) throw new Error('The service returned an incomplete comic strip.');
-  return data.panels;
-}
-
-form.addEventListener('submit', async event => {
-  event.preventDefault();
-  const article = input.value.trim();
-  if (!article) return;
-  setLoading(true);
-  try {
-    const panels = await requestCartoon(article);
-    renderPanels(panels.slice(0, 4));
-  } catch (error) {
-    strip.innerHTML = `<div class="error-message"><strong>Panel jam.</strong>${escapeHtml(error.message)}</div>`;
-    status.textContent = 'Could not draw the story';
-  } finally {
-    setLoading(false);
-  }
-});
-
-sampleButton.addEventListener('click', () => { input.value = sampleStory; updateCount(); input.focus(); });
-input.addEventListener('input', updateCount);
-shareButton.addEventListener('click', async () => {
-  const text = [...document.querySelectorAll('.panel-caption')].map(panel => panel.textContent).join(' ');
-  if (!text) return;
-  await navigator.clipboard.writeText(`Headline Toons: ${text}`);
-  status.textContent = 'Summary copied to clipboard';
-  setTimeout(() => { status.textContent = 'Ready for a story'; }, 2200);
-});
-updateCount();
+form.addEventListener('submit', event => { event.preventDefault(); const text = input.value.trim(); if (!text) return; addMessage(text); input.value = ''; input.focus(); });
+document.querySelectorAll('.prompt').forEach(button => button.addEventListener('click', () => { input.value = button.dataset.prompt; input.focus(); }));
+document.querySelectorAll('.room').forEach(room => room.addEventListener('click', () => { document.querySelectorAll('.room').forEach(item => item.classList.remove('active')); room.classList.add('active'); roomTitle.textContent = room.dataset.room; }));
+document.querySelectorAll('.message-reaction').forEach(reaction => reaction.addEventListener('click', () => { reaction.classList.toggle('reacted'); reaction.querySelector('span').textContent = reaction.classList.contains('reacted') ? '1' : '0'; }));
+document.querySelector('.new-room').addEventListener('click', () => { const name = window.prompt('Name your new space'); if (!name || !name.trim()) return; const room = document.createElement('button'); room.className = 'room'; room.dataset.room = name.trim(); room.innerHTML = `<span class="room-icon blue">✳</span><span><strong>${escapeHtml(name.trim())}</strong><small>Just you · new space</small></span>`; room.addEventListener('click', () => { document.querySelectorAll('.room').forEach(item => item.classList.remove('active')); room.classList.add('active'); roomTitle.textContent = room.dataset.room; }); document.querySelector('.new-room').before(room); });
